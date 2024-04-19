@@ -1,0 +1,15 @@
+import json
+
+# Read in the JSON file
+with open('/workspace/json-practice/data/schacon.repos.json', 'r') as file:
+    data = json.load(file)
+
+# Open the CSV file for appending
+with open('chacon.csv', 'a') as csv_file:
+    # Limit the output to 5 lines
+    for repo in data[:5]:
+        name = repo['name']
+        html_url = repo['html_url']
+        updated_at = repo['updated_at']
+        visibility = repo['visibility']
+        csv_file.write(f"{name},{html_url},{updated_at},{visibility}\n")
