@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Fetching the Data
+METAR_DATA=$(curl -s "https://aviationweather.gov/api/data/metar?ids=KMCI&format=json&taf=false&hours=12&bbox=40%2C-90%2C45%2C-85")
+
+# Parse receiptTime values and output only the first six
+jq -r '.[] | .receiptTime' <<< "$METAR_DATA" | head -n 6 | while read -r line; do
+    echo "\"$line\""
+done
+
